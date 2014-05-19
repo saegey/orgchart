@@ -1,0 +1,13 @@
+{% if sortOrder == "asc" and sort == entity %}
+    <a href="/?sort={{ entity }}&sortOrder=desc&q={{ searchQuery }}">
+        {{ title }} <i class="fa fa-arrow-down"></i>
+    </a>
+{% elseif sort == entity %}
+    <a href="/?sort={{ entity }}&sortOrder=asc&q={{ searchQuery }}">
+        {{ title }} <i class="fa fa-arrow-up"></i>
+    </a>
+{% else %}
+    <a href="/?sort={{ entity }}&sortOrder=asc&q={{ searchQuery }}">
+        {{ title }}
+    </a>
+{% endif %}

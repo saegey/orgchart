@@ -1,0 +1,55 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well">
+            {% include '_search_form.html.twig' %}
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="30%">
+                    {% include '_sort_link.html.twig' with {'title': 'Employee Name', 'entity': 'name'} %}
+                    </th>
+                    <th width="30%">
+                    {% include '_sort_link.html.twig' with {'title': 'Boss Name', 'entity': 'bossName'} %}
+                    </th>
+                    <th width="20%">
+                    {% include '_sort_link.html.twig' with {'title': 'Distance from the CEO', 'entity': 'level'} %}
+                    </th>
+                    <th width="20%">{% include '_sort_link.html.twig' with {'title': 'Number of Subordinates', 'entity': 'subordinates'} %}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee["name"] }}</td>
+                    <td>{{ employee["bossName"] }}</td>
+                    <td>{{ employee["level"] }}</td>
+                    <td>{{ employee["subordinates"] }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No results found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if numPages > 1 %}
+        <ul class="pager">
+          {% if page > 1 %}
+          <li>
+            <a href="/?page={{ page - 1 }}&q={{ searchQuery }}&sort={{ sort }}&sortOrder={{ sortOrder }}">Previous</a>
+          </li>
+          {% endif %}
+          {% if page < numPages %}
+          <li>
+            <a href="/?page={{ page + 1 }}&q={{ searchQuery }}&sort={{ sort }}&sortOrder={{ sortOrder }}">Next</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
